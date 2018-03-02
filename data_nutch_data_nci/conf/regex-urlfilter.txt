@@ -163,11 +163,10 @@
 
 -^https://cbiitsolutions.cancer.gov.*
 
--^https://www.cancer.gov.*
--^https://www-qa.cancer.gov/publications/dictionaries/cancer-terms/def/.*
--^https://www-qa.cancer.gov/publications/dictionaries/genetics-dictionary/def/.*
--^https://www-qa.cancer.gov/publications/dictionaries/cancer-drug/def/.*
--^https://www-qa.cancer.gov/espanol/publicaciones/diccionario/def/.*
+-^https://www.cancer.gov/publications/dictionaries/cancer-terms/def/.*
+-^https://www.cancer.gov/publications/dictionaries/genetics-dictionary/def/.*
+-^https://www.cancer.gov/publications/dictionaries/cancer-drug/def/.*
+-^https://www.cancer.gov/espanol/publicaciones/diccionario/def/.*
 
 # accept anything else
 +.
