@@ -1,0 +1,26 @@
+<configuration>
+<property>
+	  <name>elastic.host</name>
+	  <value>ncias-p1562-v.nci.nih.gov</value>
+	  <description>The hostname to send documents to using TransportClient. Either host and port must be defined or cluster.</description>
+	</property>
+
+	<property>
+	  <name>elastic.port</name>
+	  <value>9399</value>
+	  <description>
+	  </description>
+	</property>
+
+	<property>
+	  <name>elastic.cluster</name>
+	  <value>es235_prod</value>
+	  <description>The cluster name to discover. Either host and port must be defined or cluster.</description>
+	</property>
+
+	<property>
+	  <name>elastic.index</name>
+	  <value>sitewidesearch_es235</value>
+	  <description>Default index to send documents to.</description>
+	</property>
+</configuration>
