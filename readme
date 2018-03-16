@@ -1,0 +1,4 @@
+powershell -ExecutionPolicy unrestricted tools\substitution.ps1 -InputFile <configfile> -OutputFile <outputname> -SubstituteList <substitutions-list>
+
+
+powershell -ExecutionPolicy unrestricted tools\substitution.ps1 -InputFile data_nutch_data_nci\conf\nutch-site.xml -OutputFile nutch-site.xml -SubstituteList H:\projectGao\search\gitSVN\nutch\nutch_prod.xml

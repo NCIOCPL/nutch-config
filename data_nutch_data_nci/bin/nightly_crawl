@@ -50,8 +50,7 @@ fi
 export CURL_CONNECT_TIMEOUT=60
 export CURL_MAX_TIME=3600
 
-export SITEMAP_URL1="https://www1.cancer.gov/sitemap.xml"
-export SITEMAP_URL2="https://www2.cancer.gov/sitemap.xml"
+declare -a SITEMAP_URLS=('/sitemap.xml' '/sitemaps/pageinstructions.xml' '/sitemaps/dynamiclistingpages.xml');
 
 export ELASTICSEARCH_HOST_NAME=elasticsearch-host  # set to e.g. ncias-s1559-v.nci.nih.gov via alias in /etc/hosts
 
@@ -319,37 +318,44 @@ logger "INFO: Backup Crawl Data: End"
 
 logger "INFO: Start Fetch Cancer.gov sitemap.xml"
 
-# 1st web server
-http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $SITEMAP_URL1)
-exit_status=$?
 
-debug "Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 returned an HTTP Status Code of $http_status_code."
+for i in "${SITEMAP_URLS[@]}"
+do
+    
+    u='https://www1.cancer.gov'$i
+    http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $u)
+    exit_status=$?
 
-if (( $exit_status )) ; then
-  logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 exited with non-zero status code $exit_status"
-  exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 exited with non-zero status code $exit_status"
-fi
+    echo "Fetch Cancer.gov $u: $CURL request to $u returned an HTTP Status Code of $http_status_code."
 
-if [ $http_status_code -ne "200" ] ; then
-  logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 returned an HTTP Status Code of $http_status_code.  A 200 is expected."
-  exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 exited with non-zero status code $http_status_code."
-fi
+    if (( $exit_status )) ; then
+      logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
+      exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
+    fi
 
-# 2nd web server
-http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $SITEMAP_URL2)
-exit_status=$?
+    if [ $http_status_code -ne "200" ] ; then
+      logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u returned an HTTP Status Code of $http_status_code.  A 200 is expected."
+      exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $http_status_code."
+    fi
 
-debug "Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 returned an HTTP Status Code of $http_status_code."
+    u='https://www2.cancer.gov'$i
+    http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $u)
+    exit_status=$?
 
-if (( $exit_status )) ; then
-  logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 exited with non-zero status code $exit_status"
-  exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 exited with non-zero status code $exit_status"
-fi
+    echo "Fetch Cancer.gov $u: $CURL request to $u returned an HTTP Status Code of $http_status_code."
 
-if [ $http_status_code -ne "200" ] ; then
-  logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 returned an HTTP Status Code of $http_status_code.  A 200 is expected."
-  exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 exited with non-zero status code $http_status_code."
-fi
+    if (( $exit_status )) ; then
+      logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
+      exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
+    fi
+
+    if [ $http_status_code -ne "200" ] ; then
+      logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u returned an HTTP Status Code of $http_status_code.  A 200 is expected."
+      exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $http_status_code."
+    fi    
+
+done
+
 
 
 logger "INFO: End Fetch Cancer.gov sitemap.xml"
