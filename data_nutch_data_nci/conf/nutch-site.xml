@@ -112,6 +112,7 @@
 <property>
     <name>index.replace.regexp</name>
     <value>
+	
 	url:searchurl=/(https|http)\:..//
 
 	title:searchtitle=/=/=/
@@ -190,7 +191,7 @@
 	  <value>${ES_INDEX_NAME}</value>
 	  <description>Default index to send documents to.</description>
 	</property>
-
+	
 	<property>
 	  <name>elastic.max.bulk.docs</name>
 	  <value>250</value>

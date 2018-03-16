@@ -38,7 +38,11 @@ export NUTCH_HEAPSIZE NUTCH_LOG_DIR NUTCH_CONF_DIR
 
 
 # Find out where crawl is
-NUTCH_NUTCH="`which nutch`"
+#NUTCH_NUTCH="`which nutch`"
+#NUTCH_NUTCH="/home/nutch/nutch1.12/src/bin/nutch"
+#NUTCH_NUTCH="/home/nutch/nutch1.12patched/runtime/local/bin/nutch"
+#NUTCH_NUTCH="/home/nutch/nutch1.13/bin/nutch"
+NUTCH_NUTCH="/home/nutch/apache-nutch-1.13noclean/runtime/local/bin/nutch"
 
 $NUTCH_NUTCH $@ 
 

@@ -62,7 +62,12 @@ LIMIT="$1"
 
 
 # Find out where crawl is
-NUTCH_CRAWL="`which crawl`"
+#NUTCH_CRAWL="`which crawl`"
+#NUTCH_CRAWL="/home/nutch/nutch1.12/src/bin/crawl"
+#NUTCH_CRAWL="/home/nutch/nutch1.12patched/runtime/local/bin/crawl"
+#NUTCH_CRAWL="/home/nutch/nutch1.13/bin/crawl"
+NUTCH_CRAWL="/home/nutch/apache-nutch-1.13noclean/runtime/local/bin/crawl"
+
 
 COMMAND="$NUTCH_CRAWL"
 if $INDEXFLAG; then 

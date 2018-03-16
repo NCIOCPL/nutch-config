@@ -1,6 +1,0 @@
-#!/bin/bash
-export ELASTICSEARCH_PROTOCOL=http   
-export ELASTICSEARCH_PORT=9200
-export NCIALERT_EMAIL=NCIAppAlerts@mail.nih.gov
-export DEV_EMAIL=gaoz@mail.nih.gov
-/data/nutch/data/nci/bin/nightly_crawl

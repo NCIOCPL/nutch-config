@@ -156,21 +156,6 @@
 -^(http|https)://ccr.cancer.gov/node/16950
 
 -^https://surveillance.cancer.gov/help/joinpoint.*
--^https://edrn.nci.nih.gov/biomarkers.*
--^https://edrn.nci.nih.gov/collaborative-groups.*
--^https://edrn.nci.nih.gov/network-consulting-team.*
--^https://edrn.nci.nih.gov/sites.*
-
--^https://cbiitsolutions.cancer.gov.*
-
--^https://www.cancer.gov/publications/dictionaries/cancer-terms/def/.*
--^https://www.cancer.gov/publications/dictionaries/genetics-dictionary/def/.*
--^https://www.cancer.gov/publications/dictionaries/cancer-drug/def/.*
--^https://www.cancer.gov/espanol/publicaciones/diccionario/def/.*
--^https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v.*
--^https://www.cancer.gov/sitemaps/clinicaltrials.xml
--^https://www.cancer.gov/sitemaps/dictionaries.xml
-
 
 # accept anything else
 +.
