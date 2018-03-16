@@ -167,6 +167,19 @@
 -^https://www.cancer.gov/publications/dictionaries/genetics-dictionary/def/.*
 -^https://www.cancer.gov/publications/dictionaries/cancer-drug/def/.*
 -^https://www.cancer.gov/espanol/publicaciones/diccionario/def/.*
+-^https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v.*
+-^https://www.cancer.gov/sitemaps/clinicaltrials.xml
+-^https://www.cancer.gov/sitemaps/dictionaries.xml
+
+
+-^https://www-qa.cancer.gov/publications/dictionaries/cancer-terms/def/.*
+-^https://www-qa.cancer.gov/publications/dictionaries/genetics-dictionary/def/.*
+-^https://www-qa.cancer.gov/publications/dictionaries/cancer-drug/def/.*
+-^https://www-qa.cancer.gov/espanol/publicaciones/diccionario/def/.*
+-^https://www-qa.cancer.gov/about-cancer/treatment/clinical-trials/search/v.*
+-^https://www-qa.cancer.gov/sitemaps/clinicaltrials.xml
+-^https://www-qa.cancer.gov/sitemaps/dictionaries.xml
 
 # accept anything else
-+.
++^https://www.cancer.gov/.*
++^https://www-qa.cancer.gov/.*
