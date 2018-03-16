@@ -59,11 +59,11 @@ declare -i DISK_SPACE_WARN_THRESHOLD=20000000   # In kB. Send a warning email if
 declare -i DISK_SPACE_ERROR_THRESHOLD=10000000  # In kB. Do not run crawl script if data disk space drops below this level.
 
 # Retention time settings
-export BACKUP_RETENTION_DAYS=7
+export BACKUP_RETENTION_DAYS=3
 export CRAWL_SEGMENT_RETENTION_DAYS=3
 
 # Set up env for crawl
-#export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/nutch/bin
+export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/nutch/bin:/home/.nvm/versions/node/v6.5.0/bin/node
 export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk.x86_64
 
 
@@ -337,41 +337,8 @@ do
       logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u returned an HTTP Status Code of $http_status_code.  A 200 is expected."
       exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $http_status_code."
     fi
-    
-    # u='https://www1.cancer.gov'$i
-    # http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $u)
-    # exit_status=$?
-
-    # echo "Fetch Cancer.gov $u: $CURL request to $u returned an HTTP Status Code of $http_status_code."
-
-    # if (( $exit_status )) ; then
-      # logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
-      # exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
-    # fi
-
-    # if [ $http_status_code -ne "200" ] ; then
-      # logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u returned an HTTP Status Code of $http_status_code.  A 200 is expected."
-      # exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $http_status_code."
-    # fi
-
-    # u='https://www2.cancer.gov'$i
-    # http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $u)
-    # exit_status=$?
-
-    # echo "Fetch Cancer.gov $u: $CURL request to $u returned an HTTP Status Code of $http_status_code."
-
-    # if (( $exit_status )) ; then
-      # logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
-      # exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
-    # fi
-
-    # if [ $http_status_code -ne "200" ] ; then
-      # logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u returned an HTTP Status Code of $http_status_code.  A 200 is expected."
-      # exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $http_status_code."
-    # fi    
 
 done
-
 logger "INFO: End Fetch Cancer.gov sitemap.xml"
 
 

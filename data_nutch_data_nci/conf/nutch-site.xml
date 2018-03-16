@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <!-- Put site-specific property overrides in this file. -->
@@ -105,7 +105,7 @@
 
 	<property>
 		<name>plugin.includes</name>
-			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(host|pass|regex|basic)</value>
+			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
 	</property>	
 
 
@@ -166,7 +166,7 @@
 
  	<!-- Elasticsearch properties -->
 
-<property>
+	<property>
 	  <name>elastic.host</name>
 	  <value>${ES_HOST}</value>
 	  <description>The hostname to send documents to using TransportClient. Either host and port must be defined or cluster.</description>
