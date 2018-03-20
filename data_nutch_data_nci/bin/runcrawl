@@ -26,6 +26,9 @@ done
 CRAWL_DIR="`dirname "$THIS"`"
 CRAWL_HOME="`cd "$CRAWL_DIR/.." ; pwd`"
 
+
+export NUTCH_JAVA_HOME=/usr/lib/jdk1.8.0_151
+
 # Nutch Java Heapsize @ 4gb
 NUTCH_HEAPSIZE=4096
 # Local Nutch Log dir
@@ -63,14 +66,13 @@ LIMIT="$1"
 
 # Find out where crawl is
 #NUTCH_CRAWL="`which crawl`"
-#NUTCH_CRAWL="/home/nutch/nutch1.12/src/bin/crawl"
-NUTCH_CRAWL="/home/nutch/nutch1.12patched/runtime/local/bin/crawl"
+NUTCH_CRAWL="/home/nutch/nutchgit/runtime/local/bin/crawl"
 
 
 COMMAND="$NUTCH_CRAWL"
 if $INDEXFLAG; then 
   COMMAND="$COMMAND --index"
 fi
-COMMAND="$COMMAND $NUTCH_CONF_DIR/seeds.txt $CRAWL_HOME/crawl_data $LIMIT"
+COMMAND="$COMMAND -s $NUTCH_CONF_DIR/seeds.txt $CRAWL_HOME/crawl_data $LIMIT"
 
 $COMMAND 

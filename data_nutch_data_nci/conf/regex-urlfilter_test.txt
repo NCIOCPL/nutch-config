@@ -50,7 +50,7 @@
 
 
 ## Remove non-production tiers
--^(http|https)://[^/]*-dev\.(cancer|nci\.nih|ncifcrf)\.gov.*
+-^(http|https)://[^/]*-dev\.(nci\.nih|ncifcrf)\.gov.*
 -^(http|https)://[^/]*-qa\.(cancer|nci\.nih|ncifcrf)\.gov.*
 -^(http|https)://wwwqa\.cancer\.gov.*
 -^(http|https)://[^/]*-test\.(cancer|nci\.nih|ncifcrf)\.gov.*
@@ -127,42 +127,13 @@
 -^(http|https)://training.cancer.gov.*
 -^(http|https)://cancerresearchideas.cancer.gov/.+
 -^(http|https)://www.cancerresearchideas.cancer.gov/.+
--^(http|https)://home.ccr.cancer.gov/intra.*
 
 
 #unreachable from outside firewall
 -^(http|https)://tw-01.cs.wds.ncifcrf.gov.*
 
-#unreachable 
--^(http|https)://ncifinprint.ncifcrf.gov.*
 
-#edrn
--^(http|https)://edrn.nci.nih.gov/resources/miscellaneous-resources/http.*
-
-#ncifrederick
--^(?i)(http|https)://ncifrederick.cancer.gov/programs.*
--^(?i)(http|https)://ncifrederick.cancer.gov/research.*
--^(?i)(http|https)://ncifrederick.cancer.gov/services.*
--^(?i)(http|https)://ncifrederick.cancer.gov/helpcenter.*
--^(?i)(http|https)://ncifrederick.cancer.gov/campus.*
--^(?i)(http|https)://ncifrederick.cancer.gov/careers.*
--^(?i)(http|https)://ncifrederick.cancer.gov/cad.*
--^(?i)(http|https)://ncifrederick.cancer.gov/ehs.*
--^(?i)(http|https)://ncifrederick.cancer.gov/lasp.*
--^(?i)(http|https)://ncifrederick.cancer.gov/staff.*
-
-#ccr
--^(?i)(http|https)://ccr.cancer.gov/staff.*
--^(http|https)://ccr.cancer.gov/node/16950
-
--^https://surveillance.cancer.gov/help/joinpoint.*
--^https://edrn.nci.nih.gov/biomarkers.*
--^https://edrn.nci.nih.gov/collaborative-groups.*
--^https://edrn.nci.nih.gov/network-consulting-team.*
--^https://edrn.nci.nih.gov/sites.*
-
--^https://cbiitsolutions.cancer.gov.*
 
 # accept anything else
-+.
++https://dceg.cancer.gov
 

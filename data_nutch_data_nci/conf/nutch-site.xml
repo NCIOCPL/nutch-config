@@ -32,7 +32,7 @@
 	<property>
 		<name>db.fetch.interval.default</name>
 		<!--<value>1202400</value>-->
-		<value>50400</value>
+		<value>86400</value>
 		<description>NCI OVERRIDE: Setting this to about 14 days.  Technically, 14 days minus 2 hrs.  20151113 setting to every night for testing </description>
 	</property>
 
@@ -92,7 +92,7 @@
 
 
 	<!-- If fetcher.threads.per.queue == 1 then uncomment the lines below
-	<property>
+	     	<property>
 	  <name>fetcher.server.delay</name>
 	  <value>0.5</value>
 	  <description>NCI OVERRIDE: Attempting this value to not kill slow servers.  Would be nice to set this per host.
@@ -105,14 +105,13 @@
 
 	<property>
 		<name>plugin.includes</name>
-			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic-rest|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
 	</property>	
 
 
 <property>
     <name>index.replace.regexp</name>
     <value>
-	
 	url:searchurl=/(https|http)\:..//
 
 	title:searchtitle=/=/=/
@@ -165,19 +164,70 @@
 		<description>NCI OVERRIDE: We only want to detect the language it it exists in the headers/metatags</description>
 	</property>
 
- 	<!-- Elasticsearch properties -->
+    
+    
+    <!--elasticsearch rest properties-->
+<property>
+    <name>elastic.rest.host</name>
+    <value>${ES_HOST}</value>
+    <description>The hostname to send documents to using Elasticsearch Jest. Both host
+        and port must be defined</description>
+</property>
 
-	
-	<property>
-	  <name>elastic.max.bulk.docs</name>
-	  <value>250</value>
-	  <description>Maximum size of the bulk in number of documents.</description>
-	</property>
+<property>
+    <name>elastic.rest.port</name>
+    <value>${ES_REST_PORT}</value>
+    <description>The port to connect to using Elasticsearch Jest.</description>
+</property>
 
-	<property>
-	  <name>elastic.max.bulk.size</name>
-	  <value>2500500</value>
-	  <description>Maximum size of the bulk in bytes.</description>
-	</property>
+<property>
+    <name>elastic.rest.index</name>
+    <value>${ES_INDEX_NAME}</value>
+    <description>Default index to send documents to.</description>
+</property>
 
+<property>
+    <name>elastic.rest.type</name>
+    <value>doc</value>
+    <description>Default type to send documents to.</description>
+</property>
+
+<property>
+    <name>elastic.rest.max.bulk.docs</name>
+    <value>250</value>
+    <description>Maximum size of the bulk in number of documents.</description>
+</property>
+
+<property>
+    <name>elastic.rest.max.bulk.size</name>
+    <value>26214400</value>
+    <description>Maximum size of the bulk in bytes.</description>
+</property>
+
+<property>
+    <name>elastic.rest.https</name>
+    <value>true</value>
+    <description>
+        "true" to enable https, "false" to disable https
+        If you've disabled http access (by forcing https), be sure to
+        set this to true, otherwise you might get "connection reset by peer".
+    </description>
+</property>
+
+
+
+<property>
+    <name>elastic.rest.trustallhostnames</name>
+    <value>true</value>
+    <description>
+        "true" to trust elasticsearch server's certificate even if its listed domain name does not
+        match the domain they are hosted on
+        "false" to check if the elasticsearch server's certificate's listed domain is the same domain
+        that it is hosted on, and if it doesn't, then fail to index
+        (only used when https is enabled)
+</description>
+</property>
+
+    
 </configuration>
+

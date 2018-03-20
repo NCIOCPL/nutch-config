@@ -64,8 +64,8 @@ export BACKUP_RETENTION_DAYS=3
 export CRAWL_SEGMENT_RETENTION_DAYS=3
 
 # Set up env for crawl
-export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/nutch/nutch1.12patched/runtime/local/bin:/home/.nvm/versions/node/v6.5.0/bin/node
-export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk.x86_64
+export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/nutch/nutchgit/runtime/local/bin:/home/.nvm/versions/node/v6.5.0/bin/node
+export JAVA_HOME=export JAVA_HOME=/usr/lib/jdk1.8.0_151
 
 
 
@@ -461,4 +461,5 @@ email_notification "$THIS_SCRIPT_NAME has completed successfully"  $ALL_IS_WELL_
 #
 
 exit 0
+
 

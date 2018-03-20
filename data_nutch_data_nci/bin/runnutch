@@ -26,6 +26,9 @@ done
 CRAWL_DIR="`dirname "$THIS"`"
 CRAWL_HOME="`cd "$CRAWL_DIR/.." ; pwd`"
 
+export NUTCH_JAVA_HOME=/usr/lib/jdk1.8.0_151
+
+
 # Nutch Java Heapsize @ 4gb
 NUTCH_HEAPSIZE=4096
 # Local Nutch Log dir
@@ -39,15 +42,7 @@ export NUTCH_HEAPSIZE NUTCH_LOG_DIR NUTCH_CONF_DIR
 
 # Find out where crawl is
 #NUTCH_NUTCH="`which nutch`"
-#NUTCH_NUTCH="/home/nutch/nutch1.12/src/bin/nutch"
-NUTCH_NUTCH="/home/nutch/nutch1.12patched/runtime/local/bin/nutch  "
+NUTCH_NUTCH="/home/nutch/nutchgit/runtime/local/bin/nutch"
 
-myArray=( "$@" )
-
-if [ $1 = 'index' ] ||  [ $1 = 'clean' ]
-then
-    myArray[0]="$1  -conf $NUTCH_CONF_DIR/esconf.xml"
-fi
-
-$NUTCH_NUTCH ${myArray[@]}
+$NUTCH_NUTCH $@ 
 
