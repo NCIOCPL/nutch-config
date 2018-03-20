@@ -167,7 +167,31 @@
 
  	<!-- Elasticsearch properties -->
 
-	
+	<property>
+	  <name>elastic.host</name>
+	  <value>${ES_HOST}</value>
+	  <description>The hostname to send documents to using TransportClient. Either host and port must be defined or cluster.</description>
+	</property>
+
+	<property>
+	  <name>elastic.port</name>
+	  <value>${ES_CLUSTER_PORT_235}</value>
+	  <description>
+	  </description>
+	</property>
+
+	<property>
+	  <name>elastic.cluster</name>
+	  <value>${ES_CLUSTER_NAME_235}</value>
+	  <description>The cluster name to discover. Either host and port must be defined or cluster.</description>
+	</property>
+
+	<property>
+	  <name>elastic.index</name>
+	  <value>${ES_INDEX_NAME}</value>
+	  <description>Default index to send documents to.</description>
+	</property>
+
 	<property>
 	  <name>elastic.max.bulk.docs</name>
 	  <value>250</value>
