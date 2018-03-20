@@ -175,14 +175,14 @@
 
 	<property>
 	  <name>elastic.port</name>
-	  <value>${ES_CLUSTER_PORT}</value>
+	  <value>${ES_CLUSTER_PORT_235}</value>
 	  <description>
 	  </description>
 	</property>
 
 	<property>
 	  <name>elastic.cluster</name>
-	  <value>${ES_CLUSTER_NAME}</value>
+	  <value>${ES_CLUSTER_NAME_235}</value>
 	  <description>The cluster name to discover. Either host and port must be defined or cluster.</description>
 	</property>
 
