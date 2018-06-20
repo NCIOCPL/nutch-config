@@ -16,7 +16,7 @@ export THIS_HOST_NAME=`uname -n`          # e.g. "ncias-s1234-v.nci.nih.gov"
 declare -i DEBUG_MODE=0                   # set to anything intiger greater than 0 to enable debugging output to log file and STDOUT
 
 # Collection Directories
-export COLLECTION_BASE_DIR=/data/nutch/data/nci
+export COLLECTION_BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" && cd ../  && pwd )"
 export COLLECTION_TMP_DIR=$COLLECTION_BASE_DIR/tmp
 export COLLECTION_LOG_DIR=$COLLECTION_BASE_DIR/log
 export COLLECTION_BIN_DIR=$COLLECTION_BASE_DIR/bin
@@ -50,7 +50,8 @@ fi
 export CURL_CONNECT_TIMEOUT=60
 export CURL_MAX_TIME=3600
 
-declare -a SITEMAP_URLS=('/sitemap.xml' '/sitemaps/pageinstructions.xml' '/sitemaps/dynamiclistingpages.xml');
+export SITEMAP_URL1="https://www1.cancer.gov/sitemap.xml"
+export SITEMAP_URL2="https://www2.cancer.gov/sitemap.xml"
 
 export ELASTICSEARCH_HOST_NAME=elasticsearch-host  # set to e.g. ncias-s1559-v.nci.nih.gov via alias in /etc/hosts
 
@@ -63,8 +64,8 @@ export BACKUP_RETENTION_DAYS=3
 export CRAWL_SEGMENT_RETENTION_DAYS=3
 
 # Set up env for crawl
-export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/nutch/bin:/home/.nvm/versions/node/v6.5.0/bin/node
-export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk.x86_64
+export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/nutch/nutchgit/runtime/local/bin:/home/.nvm/versions/node/v6.5.0/bin/node
+export JAVA_HOME=export JAVA_HOME=/usr/lib/jdk1.8.0_151
 
 
 
@@ -318,44 +319,37 @@ logger "INFO: Backup Crawl Data: End"
 
 logger "INFO: Start Fetch Cancer.gov sitemap.xml"
 
+# 1st web server
+http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $SITEMAP_URL1)
+exit_status=$?
 
-for i in "${SITEMAP_URLS[@]}"
-do
-    
-    u='https://www1.cancer.gov'$i
-    http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $u)
-    exit_status=$?
+debug "Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 returned an HTTP Status Code of $http_status_code."
 
-    echo "Fetch Cancer.gov $u: $CURL request to $u returned an HTTP Status Code of $http_status_code."
+if (( $exit_status )) ; then
+  logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 exited with non-zero status code $exit_status"
+  exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 exited with non-zero status code $exit_status"
+fi
 
-    if (( $exit_status )) ; then
-      logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
-      exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
-    fi
+if [ $http_status_code -ne "200" ] ; then
+  logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 returned an HTTP Status Code of $http_status_code.  A 200 is expected."
+  exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL1 exited with non-zero status code $http_status_code."
+fi
 
-    if [ $http_status_code -ne "200" ] ; then
-      logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u returned an HTTP Status Code of $http_status_code.  A 200 is expected."
-      exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $http_status_code."
-    fi
+# 2nd web server
+http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $SITEMAP_URL2)
+exit_status=$?
 
-    u='https://www2.cancer.gov'$i
-    http_status_code=$($CURL -s -o /dev/null -w "%{http_code}" $u)
-    exit_status=$?
+debug "Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 returned an HTTP Status Code of $http_status_code."
 
-    echo "Fetch Cancer.gov $u: $CURL request to $u returned an HTTP Status Code of $http_status_code."
+if (( $exit_status )) ; then
+  logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 exited with non-zero status code $exit_status"
+  exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 exited with non-zero status code $exit_status"
+fi
 
-    if (( $exit_status )) ; then
-      logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
-      exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $exit_status"
-    fi
-
-    if [ $http_status_code -ne "200" ] ; then
-      logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u returned an HTTP Status Code of $http_status_code.  A 200 is expected."
-      exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $u exited with non-zero status code $http_status_code."
-    fi    
-
-done
-
+if [ $http_status_code -ne "200" ] ; then
+  logger "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 returned an HTTP Status Code of $http_status_code.  A 200 is expected."
+  exit_on_error $LINENO "ERROR: Fetch Cancer.gov sitemap.xml: $CURL request to $SITEMAP_URL2 exited with non-zero status code $http_status_code."
+fi
 
 
 logger "INFO: End Fetch Cancer.gov sitemap.xml"
@@ -394,7 +388,7 @@ logger "INFO: End Run Crawl"
 
 logger "INFO: Start Post Crawl Optimize"
 
-$CURL --insecure --connect-timeout $CURL_CONNECT_TIMEOUT --max-time $CURL_MAX_TIME -XPOST "$ELASTICSEARCH_PROTOCOL://$ELASTICSEARCH_HOST_NAME:$ELASTICSEARCH_PORT/cgov/_optimize?max_num_segments=1" >> $NIGHTLY_CRAWL_LOG_FILE 2>&1
+$CURL --insecure --connect-timeout $CURL_CONNECT_TIMEOUT --max-time $CURL_MAX_TIME -XPOST "$ELASTICSEARCH_PROTOCOL://$ELASTICSEARCH_HOST_NAME:$ELASTICSEARCH_PORT/cgov/_forcemerge?max_num_segments=1" >> $NIGHTLY_CRAWL_LOG_FILE 2>&1
 exit_status=$?
 
 if (( $exit_status )) ; then
@@ -467,4 +461,5 @@ email_notification "$THIS_SCRIPT_NAME has completed successfully"  $ALL_IS_WELL_
 #
 
 exit 0
+
 

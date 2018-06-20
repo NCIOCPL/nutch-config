@@ -26,6 +26,7 @@
 <!-- The following rules show how to strip out session IDs, default pages, 
      interpage anchors, etc. Order does matter!  -->
 <regex-normalize>
+
 <!-- removes session ids from urls (such as jsessionid and PHPSESSID) -->
 <regex>
   <pattern>(?i)(;?\b_?(l|j|bv_)?(sid|phpsessid|sessionid)=.*?)(\?|&amp;|#|$)</pattern>
@@ -88,10 +89,6 @@
    <substitution>%20</substitution> 
 </regex> 
 
-<regex> 
-   <pattern>(.*[^%][^2][^0])(%20)+$</pattern> 
-   <substitution>$1</substitution> 
-</regex> 
 
 <regex>
   <pattern>^http://(cbiit|edrn|provocativequestions|cpfp)\.nci\.nih\.gov($|/$|.*$)</pattern>

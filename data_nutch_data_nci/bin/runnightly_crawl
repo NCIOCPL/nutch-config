@@ -1,6 +1,8 @@
 #!/bin/bash
-export ELASTICSEARCH_PROTOCOL=http   
-export ELASTICSEARCH_PORT=9200
+export ELASTICSEARCH_PROTOCOL=https   
+export ELASTICSEARCH_PORT=9400
 export NCIALERT_EMAIL=NCIAppAlerts@mail.nih.gov
 export DEV_EMAIL=gaoz@mail.nih.gov
-/data/nutch/data/nci/bin/nightly_crawl
+cd "$( dirname "${BASH_SOURCE[0]}")" 
+./nightly_crawl
+

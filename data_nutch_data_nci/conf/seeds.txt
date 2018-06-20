@@ -1,24 +1,24 @@
 ## Main CGov Site to Start
-https://www.cancer.gov/sitemap.xml	nutch.fetchInterval=86400 
+https://www.cancer.gov/sitemap.xml	nutch.fetchInterval=50400 
 
 ## Divisional Sites
-https://dceg.cancer.gov/	nutch.fetchInterval=86400
-https://ccr.cancer.gov/	nutch.fetchInterval=86400
-http://dctd.cancer.gov/	nutch.fetchInterval=86400
-https://cancercontrol.cancer.gov/	nutch.fetchInterval=86400
-https://dcb.nci.nih.gov/	nutch.fetchInterval=86400
-https://prevention.cancer.gov/	nutch.fetchInterval=86400
-http://deainfo.nci.nih.gov/	nutch.fetchInterval=86400
+https://dceg.cancer.gov/	nutch.fetchInterval=50400
+https://ccr.cancer.gov/	nutch.fetchInterval=50400
+http://dctd.cancer.gov/	nutch.fetchInterval=50400
+https://cancercontrol.cancer.gov/	nutch.fetchInterval=50400
+https://dcb.nci.nih.gov/	nutch.fetchInterval=50400
+https://prevention.cancer.gov/	nutch.fetchInterval=50400
+http://deainfo.nci.nih.gov/	nutch.fetchInterval=50400
 
 ## Other OCPL Managed sites with search
-http://cam.cancer.gov/	nutch.fetchInterval=86400
-https://cancergenome.nih.gov/	nutch.fetchInterval=86400
-https://proteomics.cancer.gov/	nutch.fetchInterval=86400
-https://imaging.cancer.gov/	nutch.fetchInterval=86400
+http://cam.cancer.gov/	nutch.fetchInterval=50400
+https://cancergenome.nih.gov/	nutch.fetchInterval=50400
+https://proteomics.cancer.gov/	nutch.fetchInterval=50400
+https://imaging.cancer.gov/	nutch.fetchInterval=50400
 
 
 ## Other NCI Sites where the homepages should be refreshed more frequently
-https://seer.cancer.gov/	nutch.fetchInterval=86400
+https://seer.cancer.gov/	nutch.fetchInterval=50400
 
 ## Other Sites/seed pages that should get the default re-fetch interval
 https://ncifrederick.cancer.gov/

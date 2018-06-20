@@ -164,7 +164,7 @@
 
 <property>
   <name>http.agent.version</name>
-  <value>Nutch-1.11</value>
+  <value>Nutch-1.13</value>
   <description>A version string to advertise in the User-Agent 
    header.</description>
 </property>
@@ -341,6 +341,14 @@
   Not-Modified header. URL's that are not downloaded are not passed through
   parse or indexing filters. If you regularly modify filters, you should force
   Nutch to also download unmodified pages by disabling this feature.
+  </description>
+</property>
+
+<property>
+  <name>http.enable.cookie.header</name>
+  <value>true</value>
+  <description>Whether Nutch sends an HTTP Cookie header. The cookie value
+  is read from the CrawlDatum Cookie metadata field.
   </description>
 </property>
 
@@ -539,11 +547,11 @@
 
 <property>
   <name>db.ignore.internal.links</name>
-  <value>true</value>
-  <description>If true, when adding new links to a page, links from
-  the same host are ignored.  This is an effective way to limit the
-  size of the link database, keeping only the highest quality
-  links.
+  <value>false</value>
+  <description>If true, outlinks leading from a page to internal hosts or domain
+  will be ignored. This is an effective way to limit the crawl to include
+  only initially injected hosts, without creating complex URLFilters.
+  See 'db.ignore.external.links.mode'.
   </description>
 </property>
 
@@ -564,6 +572,14 @@
 </property>
 
  <property>
+  <name>db.ignore.external.exemptions.file</name>
+  <value>db-ignore-external-exemptions.txt</value>
+  <description>
+    This file contains exemption rules used by 'urlfiter-ignoreexempt' plugin
+  </description>
+</property>
+
+<property>
   <name>db.injector.overwrite</name>
   <value>false</value>
   <description>Whether existing records in the CrawlDB will be overwritten
@@ -612,15 +628,6 @@
   calculated as a fraction of the original page score divided by the
   number of outlinks. If this option is false, only the outlinks that passed
   URLFilters will count, if it's true then all outlinks will count.
-  </description>
-</property>
-
-<property>
-  <name>db.max.inlinks</name>
-  <value>10000</value>
-  <description>Maximum number of Inlinks per URL to be kept in LinkDb.
-  If "invertlinks" finds more inlinks than this number, only the first
-  N inlinks will be stored, and the rest will be discarded.
   </description>
 </property>
 
@@ -678,6 +685,35 @@
   QUANT = (int)(QUANT_RATE * maxFreq), where maxFreq is a maximum token
   frequency. If maxFreq > 1 then QUANT will be at least 2, which means that
   for longer texts tokens with frequency 1 will always be discarded.
+  </description>
+</property>
+
+<!-- linkdb properties -->
+
+<property>
+  <name>linkdb.max.inlinks</name>
+  <value>10000</value>
+  <description>Maximum number of Inlinks per URL to be kept in LinkDb.
+  If "invertlinks" finds more inlinks than this number, only the first
+  N inlinks will be stored, and the rest will be discarded.
+  </description>
+</property>
+
+<property>
+  <name>linkdb.ignore.internal.links</name>
+  <value>true</value>
+  <description>If true, when adding new links to a page, links from
+  the same host are ignored.  This is an effective way to limit the
+  size of the link database, keeping only the highest quality
+  links.
+  </description>
+</property>
+
+<property>
+  <name>linkdb.ignore.external.links</name>
+  <value>false</value>
+  <description>If true, when adding new links to a page, links from
+  the a different host are ignored.
   </description>
 </property>
 
@@ -954,6 +990,24 @@
    fetcher.bandwidth.target. Defaults to 30 and must be at least 1.</description>
 </property>
 
+<property>
+
+  <name>fetcher.store.robotstxt</name>
+  <value>false</value>
+  <description>If true (and fetcher.store.content is also true),
+  fetcher will store the robots.txt response content and status for
+  debugging or archival purposes. The robots.txt is added to the
+  content/ folder of the fetched segment.
+  </description>
+</property>
+
+<property>
+	<name>fetcher.publisher</name>
+	<value>false</value>
+	<description>Set this value to true if you want to use an implementation of the Publisher/Subscriber model. Make sure to set corresponding
+	Publisher implementation specific properties</description>
+</property> 
+
 <!-- moreindexingfilter plugin properties -->
 
 <property>
@@ -1040,6 +1094,20 @@
   <name>indexer.skip.notmodified</name>
   <value>false</value>
   <description>Whether the indexer will skip records with a db_notmodified status.
+  </description>
+</property>
+
+<property>
+  <name>indexer.delete.robots.noindex</name>
+  <value>false</value>
+  <description>Whether the indexer will delete documents marked by robots=noindex
+  </description>
+</property>
+
+<property>
+  <name>indexer.delete.skipped.by.indexingfilter</name>
+  <value>false</value>
+  <description>Whether the indexer will delete documents that were skipped by indexing filters
   </description>
 </property>
 
@@ -1286,6 +1354,22 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
   </description>
 </property>
 
+<property>
+  <name>tika.extractor</name>
+  <value>none</value>
+  <description>
+  Which text extraction algorithm to use. Valid values are: boilerpipe or none.
+  </description>
+</property>
+
+<property> 
+  <name>tika.extractor.boilerpipe.algorithm</name>
+  <value>ArticleExtractor</value>
+  <description> 
+  Which Boilerpipe algorithm to use. Valid values are: DefaultExtractor, ArticleExtractor
+  or CanolaExtractor.
+  </description>
+</property>
 
 <!-- urlfilter plugin properties -->
 
@@ -1367,6 +1451,45 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
   The depth is used to prioritise URLs in the generation step so that
   shallower pages are fetched first.
   </description>
+</property>
+
+<!-- scoring similarity properties
+Add scoring-similarity to the list of active plugins
+ in the parameter 'plugin.includes' in order to use it. 
+For more detailed information on the working of this filter 
+visit https://wiki.apache.org/nutch/SimilarityScoringFilter-->
+
+<property>
+    <name>scoring.similarity.model</name>
+    <value>cosine</value>
+    <description>The type of similarity metric to use. Eg - cosine (which is, currently, the only available model).
+      Please make sure to set the model specific properties for the scoring to function properly. 
+      Description of these properties can be found on the wiki.
+    </description>
+</property>
+
+ <property>
+  <name>scoring.similarity.ngrams</name>
+  <value>1,1</value>
+  <description>Specifies the min 'n' and max 'n' in ngrams as comma-separated.
+    If one value is specified as 'n', it will be used for both the min 'n' and max 'n' in ngrams.
+  </description>
+</property>
+
+<property>
+    <name>cosine.goldstandard.file</name>
+    <value>goldstandard.txt</value>
+    <description>Path to the gold standard file which contains all the relevant text and terms, 
+      pertaining to the domain.
+    </description>
+</property>
+
+ <property>
+    <name>scoring.similarity.stopword.file</name>
+    <value>stopwords.txt</value>
+    <description>Name of the stopword text file. The user can specify a custom list of stop words 
+      in a text file. Each new stopword should be on a new line.
+    </description>
 </property>
 
 <!-- language-identifier plugin properties -->
@@ -1715,8 +1838,8 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
 <property>
   <name>elastic.host</name>
   <value></value>
-  <description>The hostname to send documents to using TransportClient. Either host
-  and port must be defined or cluster.</description>
+  <description>Comma-separated list of hostnames to send documents to using
+  TransportClient. Either host and port must be defined or cluster.</description>
 </property>
 
 <property> 
@@ -1748,6 +1871,27 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
   <name>elastic.max.bulk.size</name>
   <value>2500500</value> 
   <description>Maximum size of the bulk in bytes.</description>
+</property>
+
+<property>
+  <name>elastic.exponential.backoff.millis</name>
+  <value>100</value>
+  <description>Initial delay for the BulkProcessor's exponential backoff policy.
+  </description>
+</property>
+
+<property>
+  <name>elastic.exponential.backoff.retries</name>
+  <value>10</value>
+  <description>Number of times the BulkProcessor's exponential backoff policy
+  should retry bulk operations.</description>
+</property>
+
+<property>
+  <name>elastic.bulk.close.timeout</name>
+  <value>600</value>
+  <description>Number of seconds allowed for the BulkProcessor to complete its
+  last operation.</description>
 </property>
 
 <!-- subcollection properties -->
@@ -1785,6 +1929,71 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
   </description>
 </property>
 
+<!-- plugin properties that applies to lib-selenium, protocol-selenium,
+     protocol-interactiveselenium, lib-htmlunit, protocol-htmlunit -->
+
+<property>
+  <name>page.load.delay</name>
+  <value>3</value>
+  <description>
+    The delay in seconds to use when loading a page with htmlunit or selenium. 
+  </description>
+</property>
+
+<property>
+  <name>take.screenshot</name>
+  <value>false</value>
+  <description>
+    Boolean property determining whether the protocol-htmlunit
+    WebDriver should capture a screenshot of the URL. If set to
+    true remember to define the 'screenshot.location'
+    property as this determines the location screenshots should be
+    persisted to on HDFS. If that property is not set, screenshots
+    are simply discarded.
+  </description>
+</property>
+
+<property>
+  <name>screenshot.location</name>
+  <value></value>
+  <description>
+    The location on disk where a URL screenshot should be saved
+    to if the 'take.screenshot' property is set to true.
+    By default this is null, in this case screenshots held in memory
+    are simply discarded.
+  </description>
+</property>
+
+<!-- lib-htmlunit plugin properties; applies to protocol-htmlunit -->
+
+<property>
+  <name>htmlunit.enable.javascript</name>
+  <value>true</value>
+  <description>
+    A Boolean value representing if javascript should
+    be enabled or disabled when using htmlunit. The default value is enabled. 
+  </description>
+</property>
+
+<property>
+  <name>htmlunit.javascript.timeout</name>
+  <value>3500</value>
+  <description>
+    The timeout in milliseconds when loading javascript with lib-htmlunit. This
+    setting is used by protocol-htmlunit since they depending on 
+    lib-htmlunit for fetching.
+  </description>
+</property>
+
+<property>
+  <name>htmlunit.enable.css</name>
+  <value>false</value>
+  <description>
+    A Boolean value representing if CSS should
+    be enabled or disabled when using htmlunit. The default value is disabled.
+  </description>
+</property>
+
 <!-- protocol-selenium plugin properties -->
 
 <property>
@@ -1793,34 +2002,10 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
   <description>
     A String value representing the flavour of Selenium 
     WebDriver() to use. Currently the following options
-    exist - 'firefox', 'chrome', 'safari', 'opera' and 'remote'.
+    exist - 'firefox', 'chrome', 'safari', 'opera', 'phantomjs' and 'remote'.
     If 'remote' is used it is essential to also set correct properties for
     'selenium.hub.port', 'selenium.hub.path', 'selenium.hub.host',
     'selenium.hub.protocol', 'selenium.grid.driver' and 'selenium.grid.binary'.
-  </description>
-</property>
-
-<property>
-  <name>selenium.take.screenshot</name>
-  <value>false</value>
-  <description>
-    Boolean property determining whether the protocol-selenium
-    WebDriver should capture a screenshot of the URL. If set to
-    true remember to define the 'selenium.screenshot.location' 
-    property as this determines the location screenshots should be 
-    persisted to on HDFS. If that property is not set, screenshots
-    are simply discarded.
-  </description>
-</property>
-
-<property>
-  <name>selenium.screenshot.location</name>
-  <value></value>
-  <description>
-    The location on disk where a URL screenshot should be saved
-    to if the 'selenium.take.screenshot' property is set to true.
-    By default this is null, in this case screenshots held in memory
-    are simply discarded.
   </description>
 </property>
 
@@ -1853,7 +2038,7 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
   <value>firefox</value>
   <description>A String value representing the flavour of Selenium 
     WebDriver() used on the selenium grid. Currently the following options
-    exist - 'firefox' </description>
+    exist - 'firefox', 'phantomjs' </description>
 </property>
 
 <property>
@@ -1864,15 +2049,54 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
  </description>
 </property>
 
-<!-- lib-selenium configuration -->
+<!-- selenium firefox configuration; 
+     applies to protocol-selenium and protocol-interactiveselenium plugins -->
 <property>
-  <name>libselenium.page.load.delay</name>
-  <value>3</value>
-  <description>
-    The delay in seconds to use when loading a page with lib-selenium. This
-    setting is used by protocol-selenium and protocol-interactiveselenium
-    since they depending on lib-selenium for fetching.
-  </description>
+  <name>selenium.firefox.allowed.hosts</name>
+  <value>localhost</value>
+  <description>A String value representing the allowed hosts preference
+  according to the operating system hosts file (Example - /etc/hosts in Unix). 
+  Currently this option exist for - 'firefox' </description>
+</property>
+
+<property>
+  <name>selenium.firefox.binary.timeout</name>
+  <value>45</value>
+  <description>A Long value representing the timeout value
+  for firefox to be available for command execution. The value is in seconds. 
+  Currently this option exist for - 'firefox' </description>
+</property>
+
+<property>
+  <name>selenium.firefox.enable.flash</name>
+  <value>false</value>
+  <description>A Boolean value representing if flash should
+  be enabled or disabled. The default value is disabled. 
+  Currently this option exist for - 'firefox' </description>
+</property>
+
+<property>
+  <name>selenium.firefox.load.image</name>
+  <value>1</value>
+  <description>An Integer value representing the restriction on
+  loading images. The default value is no restriction i.e. load all images.
+  Other options are:
+  1: Load all images, regardless of origin
+  2: Block all images
+  3: Prevent third-party images from loading 
+  Currently this option exist for - 'firefox' </description>
+</property>
+
+<property>
+  <name>selenium.firefox.load.stylesheet</name>
+  <value>1</value>
+  <description>An Integer value representing the restriction on
+  loading stylesheet. The default value is no restriction i.e. load 
+  all stylesheet.
+  Other options are:
+  1: Load all stylesheet
+  2: Block all stylesheet
+  Currently this option exist for - 'firefox' </description>
 </property>
 
 <!-- protocol-interactiveselenium configuration -->
@@ -1936,5 +2160,162 @@ CAUTION: Set the parser.timeout to -1 or a bigger value than 30, when using this
     or outlinks.
   </description>
 </property>
+
+<!-- HostDB settings -->
+<property>
+  <name>hostdb.recheck.interval</name>
+  <value>86400000</value>
+  <description>
+    Interval between rechecks in milliseconds. Default is one week. Recheck
+    interval is multiplied by the number of DNS lookup failures for a given
+    host.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.purge.failed.hosts.threshold</name>
+  <value>3</value>
+  <description>
+    If hosts have more failed DNS lookups than this threshold, they are
+    removed from the HostDB. Hosts can, of course, return if they are still
+    present in the CrawlDB.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.num.resolvers.threads</name>
+  <value>25</value>
+  <description>
+    Number of resolver threads per reducer. Make sure your DNS resolver is
+    capable of handling this value multiplied by the number of reducers.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.check.failed</name>
+  <value>true</value>
+  <description>
+    True if hosts for which DNS lookup failed are eligible for recheck. If
+    false, hosts that failed DNS lookup more than 0 times are not eligible
+    for DNS lookup.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.check.new</name>
+  <value>true</value>
+  <description>
+    True if newly discovered hosts eligible for DNS lookup check. If false,
+    hosts that are just added to the HostDB are not eligible for DNS lookup.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.check.known</name>
+  <value>true</value>
+  <description>
+    True if newly already known hosts eligible for DNS lookup check. If false,
+    known hosts are not eligible for DNS lookup.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.force.check</name>
+  <value>false</value>
+  <description>
+    If true hosts are checked regardless of their respective recheck
+    intervals or status.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.url.filter</name>
+  <value>false</value>
+  <description>
+    Whether the records are to be passed through configured filters.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.url.normalize</name>
+  <value>false</value>
+  <description>
+    Whether the records are to be passed through configured normalizers.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.numeric.fields</name>
+  <value>_rs_</value>
+  <description>
+    Comma-separated list of CrawlDatum metadata fields for which aggregations are needed.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.string.fields</name>
+  <value>Content-Type</value>
+  <description>
+    Comma-separated list of CrawlDatum metadata fields for which sums are needed.
+  </description>
+</property>
+
+<property>
+  <name>hostdb.percentiles</name>
+  <value>50,75,95,99</value>
+  <description>
+    Comma-separated list of percentiles that must be calculated for all numeric
+    field aggregations. Host metadata will contain fields for each percentile.
+  </description>
+</property>
+
+<!-- publisher properties 
+      Do not forget to add the name of your publisher implementation 
+      in plugin.includes ex- publish-rabbitmq -->
+<property>
+  <name>publisher.queue.type</name>
+  <value></value>
+  <description>
+    Choose the type of Queue being used (ex - RabbitMQ, ActiveMq, Kafka, etc). 
+    Currently there exists an implemtation for RabbitMQ producer. 
+  </description>
+</property>
+<property>
+  <name>publisher.order</name>
+  <value></value>
+  <description>
+    The order in which the publisher queues would be loaded
+  </description>
+</property>
+<!-- RabbitMQ properties -->
+<property>
+  <name>rabbitmq.exchange.server</name>
+  <value></value>
+  <description>
+    Name for the exchange server to use. Default - "fetcher_log"
+  </description>
+</property>
+<property>
+  <name>rabbitmq.exchange.type</name>
+  <value></value>
+  <description>
+    There are a few exchange types available: direct, topic, headers and fanout. Default "fanout".
+  </description>
+</property>
+<property>
+  <name>rabbitmq.host</name>
+  <value></value>
+  <description>
+    Host on which the RabbitMQ server is running. Default "localhost".
+  </description>
+</property>
+<property>
+  <name>rabbitmq.queue.routingkey</name>
+  <value></value>
+  <description>
+    The routingKey used by publisher to publish messages to specific queues. If the exchange type is "fanout", then this property is ignored. 
+  </description>
+</property>
+
 
 </configuration>
