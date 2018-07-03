@@ -40,6 +40,7 @@
 -^(http|https)://percussion\.cancer\.gov.*
 
 ## Remove intranets
+-^https://staging.*
 -^(http|https)://deaintranet\.nci\.nih\.gov.*
 -^(http|https)://intranet\.dceg\.cancer\.gov.*
 -^(http|https)://intranet\.cancer\.gov.*
