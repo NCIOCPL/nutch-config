@@ -198,7 +198,7 @@ debug "SNAPSHOT_DATE_TIME_STAMP=$SNAPSHOT_DATE_TIME_STAMP"
 
 
 $CURL --insecure --connect-timeout $CURL_CONNECT_TIMEOUT --max-time $CURL_MAX_TIME -XPUT $ELASTICSEARCH_PROTOCOL://$ELASTICSEARCH_HOST_NAME:$ELASTICSEARCH_PORT$API_ENDPOINT_PATH$SNAPSHOT_DATE_TIME_STAMP?$QUERY_STRING --data '{
-  "indices": "cgov",
+  "indices": "cgov,bestbets_live_v1,autosg,r4r_v1",
   "ignore_unavailable": "true",
   "include_global_state": false
 }'
