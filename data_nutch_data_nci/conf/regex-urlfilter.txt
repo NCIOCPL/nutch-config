@@ -40,6 +40,7 @@
 -^(http|https)://percussion\.cancer\.gov.*
 
 ## Remove intranets
+-^https://staging.*
 -^(http|https)://deaintranet\.nci\.nih\.gov.*
 -^(http|https)://intranet\.dceg\.cancer\.gov.*
 -^(http|https)://intranet\.cancer\.gov.*
@@ -163,6 +164,42 @@
 
 -^https://cbiitsolutions.cancer.gov.*
 
+-^https://www.cancer.gov/publications/dictionaries/cancer-terms/def/.*
+-^https://www.cancer.gov/publications/dictionaries/genetics-dictionary/def/.*
+-^https://www.cancer.gov/publications/dictionaries/cancer-drug/def/.*
+-^https://www.cancer.gov/espanol/publicaciones/diccionario/def/.*
+-^https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v.*
+-^https://www.cancer.gov/sitemaps/clinicaltrials.xml
+-^https://www.cancer.gov/sitemaps/dictionaries.xml
+
+-^https://seer.cancer.gov/archive.*
+-^https://ocg.cancer.gov/programs/ctd2/supported-reagents.*
+
+-^(http|https)://fr-s-ccr-s.ncifcrf.gov.*
+-^(http|https)://fr-s-ccr-d.ncifcrf.gov.*
+-^(http|https)://cmmicroscopy.ncifcrf.gov.*
+-^(http|https)://electron-s.ncifcrf.gov.*
+-^(http|https)://fr-s-fnlcr-d.ncifcrf.gov.*
+-^(http|https)://fr-s-fnlcr-s.ncifcrf.gov.*
+-^(http|https)://fr-s-spgm-d.ncifcrf.gov.*
+-^(http|https)://fr-s-spgm-d.ncifcrf.gov.*
+-^(http|https)://fr-s-theposter-d.ncifcrf.gov.*
+-^(http|https)://fr-s-theposter-s.ncifcrf.gov.*
+-^(http|https)://fr-s-conference-d.ncifcrf.gov.*
+-^(http|https)://fr-s-conference-s.ncifcrf.gov.*
+-^(http|https)://fr-s-cbstp-d.ncifcrf.gov.*
+-^(http|https)://fr-s-cbstp-s.ncifcrf.gov.*
+-^(http|https)://fscssl-dgtsn01t.ncifcrf.gov.*
+-^(http|https)://fscssl-dgtsn01p.ncifcrf.gov.*
+-^(http|https)://fr-s-libnews-f.ncifcrf.gov.*
+-^(http|https)://fr-s-libnews-s.ncifcrf.gov.*
+-^(http|https)://fr-s-ccr-dweb-s.ncifcrf.gov.*
+-^(http|https)://ncif-staging.ncifcrf.gov.*
+-^(http|https)://ncif-Review.ncifcrf.gov.*
+-^(http|https)://search.ncifcrf.gov.*
+-^(http|https)://sourcecode.ncifcrf.gov.*
+-^(http|https)://whksip-staging.ncifcrf.gov.*
+
+
 # accept anything else
 +.
-
