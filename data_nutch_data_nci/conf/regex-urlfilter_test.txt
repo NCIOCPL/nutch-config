@@ -40,7 +40,6 @@
 -^(http|https)://percussion\.cancer\.gov.*
 
 ## Remove intranets
--^https://staging.*
 -^(http|https)://deaintranet\.nci\.nih\.gov.*
 -^(http|https)://intranet\.dceg\.cancer\.gov.*
 -^(http|https)://intranet\.cancer\.gov.*
@@ -51,7 +50,7 @@
 
 
 ## Remove non-production tiers
--^(http|https)://[^/]*-dev\.(cancer|nci\.nih|ncifcrf)\.gov.*
+-^(http|https)://[^/]*-dev\.(nci\.nih|ncifcrf)\.gov.*
 -^(http|https)://[^/]*-qa\.(cancer|nci\.nih|ncifcrf)\.gov.*
 -^(http|https)://wwwqa\.cancer\.gov.*
 -^(http|https)://[^/]*-test\.(cancer|nci\.nih|ncifcrf)\.gov.*
@@ -128,85 +127,13 @@
 -^(http|https)://training.cancer.gov.*
 -^(http|https)://cancerresearchideas.cancer.gov/.+
 -^(http|https)://www.cancerresearchideas.cancer.gov/.+
--^(http|https)://home.ccr.cancer.gov/intra.*
 
 
 #unreachable from outside firewall
 -^(http|https)://tw-01.cs.wds.ncifcrf.gov.*
 
-#unreachable 
--^(http|https)://ncifinprint.ncifcrf.gov.*
 
-#edrn
--^(http|https)://edrn.nci.nih.gov/resources/miscellaneous-resources/http.*
-
-
-#ncifrederick
--^(?i)(http|https)://ncifrederick.cancer.gov/programs.*
--^(?i)(http|https)://ncifrederick.cancer.gov/research.*
--^(?i)(http|https)://ncifrederick.cancer.gov/services.*
--^(?i)(http|https)://ncifrederick.cancer.gov/helpcenter.*
--^(?i)(http|https)://ncifrederick.cancer.gov/campus.*
--^(?i)(http|https)://ncifrederick.cancer.gov/careers.*
--^(?i)(http|https)://ncifrederick.cancer.gov/cad.*
--^(?i)(http|https)://ncifrederick.cancer.gov/ehs.*
--^(?i)(http|https)://ncifrederick.cancer.gov/lasp.*
--^(?i)(http|https)://ncifrederick.cancer.gov/staff.*
-
-#ccr
--^(?i)(http|https)://ccr.cancer.gov/staff.*
--^(http|https)://ccr.cancer.gov/node/16950
-
--^https://surveillance.cancer.gov/help/joinpoint.*
--^https://edrn.nci.nih.gov/biomarkers.*
--^https://edrn.nci.nih.gov/collaborative-groups.*
--^https://edrn.nci.nih.gov/network-consulting-team.*
--^https://edrn.nci.nih.gov/sites.*
-
--^https://cbiitsolutions.cancer.gov.*
-
--^https://www.cancer.gov/publications/dictionaries/cancer-terms/def/.*
--^https://www.cancer.gov/publications/dictionaries/genetics-dictionary/def/.*
--^https://www.cancer.gov/publications/dictionaries/cancer-drug/def/.*
--^https://www.cancer.gov/espanol/publicaciones/diccionario/def/.*
--^https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v.*
--^https://www.cancer.gov/sitemaps/clinicaltrials.xml
--^https://www.cancer.gov/sitemaps/dictionaries.xml
-
--^https://seer.cancer.gov/archive.*
--^https://ocg.cancer.gov/programs/ctd2/supported-reagents.*
-
--^(http|https)://fr-s-ccr-s.ncifcrf.gov.*
--^(http|https)://fr-s-ccr-d.ncifcrf.gov.*
--^(http|https)://cmmicroscopy.ncifcrf.gov.*
--^(http|https)://electron-s.ncifcrf.gov.*
--^(http|https)://fr-s-fnlcr-d.ncifcrf.gov.*
--^(http|https)://fr-s-fnlcr-s.ncifcrf.gov.*
--^(http|https)://fr-s-spgm-d.ncifcrf.gov.*
--^(http|https)://fr-s-spgm-d.ncifcrf.gov.*
--^(http|https)://fr-s-theposter-d.ncifcrf.gov.*
--^(http|https)://fr-s-theposter-s.ncifcrf.gov.*
--^(http|https)://fr-s-conference-d.ncifcrf.gov.*
--^(http|https)://fr-s-conference-s.ncifcrf.gov.*
--^(http|https)://fr-s-cbstp-d.ncifcrf.gov.*
--^(http|https)://fr-s-cbstp-s.ncifcrf.gov.*
--^(http|https)://fscssl-dgtsn01t.ncifcrf.gov.*
--^(http|https)://fscssl-dgtsn01p.ncifcrf.gov.*
--^(http|https)://fr-s-libnews-f.ncifcrf.gov.*
--^(http|https)://fr-s-libnews-s.ncifcrf.gov.*
--^(http|https)://fr-s-ccr-dweb-s.ncifcrf.gov.*
--^(http|https)://ncif-staging.ncifcrf.gov.*
--^(http|https)://ncif-Review.ncifcrf.gov.*
--^(http|https)://search.ncifcrf.gov.*
--^(http|https)://sourcecode.ncifcrf.gov.*
--^(http|https)://whksip-staging.ncifcrf.gov.*
--^https://assays.cancer.gov.*
--^https://api.gdc.cancer.gov/data.*
--^https://applications.prevention.cancer.gov.*
--^https://www.progressreport.cancer.gov/sites/default/files/archive.*
--^https://datascience.cancer.gov/image-captcha-generate.*
--^https://nci60.cancer.gov/publiccompare.*
--^https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga/using-tcga/technology.*
 
 # accept anything else
-+.
++https://dceg.cancer.gov
+

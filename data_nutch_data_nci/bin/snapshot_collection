@@ -17,7 +17,8 @@ export THIS_HOST_NAME=`uname -n`          # e.g. "ncias-s1234-v.nci.nih.gov"
 declare -i DEBUG_MODE=0                   # set to anything intiger greater than 0 to enable debugging output to log file and STDOUT
 
 # Collection Directories
-export COLLECTION_BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" && cd ../  && pwd )"
+export COLLECTION_BASE_DIR=/data/nutch/nci1.17
+
 export COLLECTION_TMP_DIR=$COLLECTION_BASE_DIR/tmp
 export COLLECTION_LOG_DIR=$COLLECTION_BASE_DIR/log
 export COLLECTION_BIN_DIR=$COLLECTION_BASE_DIR/bin
@@ -38,6 +39,7 @@ then
 else 
     export NOTIFICATION_EMAIL_RECIPIENTS=$DEV_EMAIL
 fi
+
 
 # Curl Settings
 export CURL_CONNECT_TIMEOUT=60
@@ -197,8 +199,8 @@ debug "SNAPSHOT_DATE_TIME_STAMP=$SNAPSHOT_DATE_TIME_STAMP"
 #}'"
 
 
-$CURL --insecure --connect-timeout $CURL_CONNECT_TIMEOUT --max-time $CURL_MAX_TIME -XPUT $ELASTICSEARCH_PROTOCOL://$ELASTICSEARCH_HOST_NAME:$ELASTICSEARCH_PORT$API_ENDPOINT_PATH$SNAPSHOT_DATE_TIME_STAMP?$QUERY_STRING --data '{
-  "indices": "cgov,bestbets_live_v1,autosg,r4r_v1",
+$CURL --insecure --connect-timeout $CURL_CONNECT_TIMEOUT --max-time $CURL_MAX_TIME -XPUT $ELASTICSEARCH_PROTOCOL://$ELASTICSEARCH_HOST_NAME:$ELASTICSEARCH_PORT$API_ENDPOINT_PATH$SNAPSHOT_DATE_TIME_STAMP?$QUERY_STRING -H 'Content-Type: application/json' --data '{
+  "indices": "cgov",
   "ignore_unavailable": "true",
   "include_global_state": false
 }'

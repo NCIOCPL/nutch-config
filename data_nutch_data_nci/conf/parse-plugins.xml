@@ -33,14 +33,10 @@
 	    <plugin id="feed" />
 	</mimeType>
 
-	<mimeType name="application/x-bzip2">
-		<!--  try and parse it with the zip parser -->
-		<plugin id="parse-zip" />
-	</mimeType>
 
-	<mimeType name="application/x-gzip">
-		<!--  try and parse it with the zip parser -->
-		<plugin id="parse-zip" />
+
+	<mimeType name="application/javascript">
+		<plugin id="parse-js" />
 	</mimeType>
 
 	<mimeType name="application/x-javascript">
@@ -51,9 +47,6 @@
 		<plugin id="parse-swf" />
 	</mimeType>
 
-	<mimeType name="application/zip">
-		<plugin id="parse-zip" />
-	</mimeType>
 
 	<mimeType name="text/html">
 		<plugin id="parse-html" />

@@ -26,7 +26,6 @@ done
 CRAWL_DIR="`dirname "$THIS"`"
 CRAWL_HOME="`cd "$CRAWL_DIR/.." ; pwd`"
 
-export NUTCH_JAVA_HOME=/usr/lib/jdk1.8.0_171
 
 
 # Nutch Java Heapsize @ 4gb
@@ -42,7 +41,8 @@ export NUTCH_HEAPSIZE NUTCH_LOG_DIR NUTCH_CONF_DIR
 
 # Find out where crawl is
 #NUTCH_NUTCH="`which nutch`"
-NUTCH_NUTCH="/usr/local/nutch/apache-nutch-1.14/bin/nutch"
+NUTCH_NUTCH="/usr/local/nutch/apache-nutch-1.17/bin/nutch"
 
 $NUTCH_NUTCH $@ 
+
 
