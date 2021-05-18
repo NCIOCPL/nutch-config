@@ -31,8 +31,8 @@
 	
 	<property>
 		<name>db.fetch.interval.default</name>
-		<!--<value>1202400</value>-->
-		<value>86400</value>
+		<value>1202400</value>
+		
 		<description>NCI OVERRIDE: Setting this to about 14 days.  Technically, 14 days minus 2 hrs.  20151113 setting to every night for testing </description>
 	</property>
 
@@ -45,14 +45,42 @@
 
 	<property>
 		<name>db.fetch.retry.max</name>
-		<value>30</value>
+		<value>10</value>
 		<description>NCI OVERRIDE: Things on the network can be sketchy, so I am upping this to a high value so that we do not accidently remove things that are having issues.  A value of 30 *should* basically mean that we should retry the item for about a month before skipping it.</description>
 	</property>	
 
 	<property>
 		<name>http.content.limit</name>
-  		<value>-1</value>
+  		<value>1048576</value>
   		<description>NCI OVERRIDE: CGov pages are too big for the default, so for now we are using unlimited.</description>
+	</property>
+
+
+	<property>
+  		<name>http.accept</name>
+  		<value>text/html,application/pdf,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</value>
+  			<description>Value of the "Accept" request header field. A space character
+  			as value will cause that no "Accept" header field is sent in the request.
+  		</description>
+	</property>
+
+	<property>
+  		<name>http.accept.charset</name>
+  		<value>utf-8,iso-8859-1;q=0.7,*;q=0.7</value>
+  			<description>Value of the "Accept-Charset" request header field. A space character
+  			as value will cause that no "Accept-Charset" header field is sent in the request.
+  		</description>
+		</property>
+
+
+	<property>
+  		<name>db.fetch.schedule.class</name>
+  		<value>org.apache.nutch.crawl.DefaultFetchSchedule</value>
+  		<description>The implementation of fetch schedule. DefaultFetchSchedule simply
+  		adds the original fetchInterval to the last fetch time, regardless of
+  		page changes, whereas AdaptiveFetchSchedule (see below) tries to adapt
+  		to the rate at which a given page is changed. 
+  		</description>
 	</property>
 	
 	<property>
@@ -105,7 +133,7 @@
 
 	<property>
 		<name>plugin.includes</name>
-			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace|zip)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
 	</property>	
 
 
@@ -127,12 +155,6 @@
 	#Replace DCEGs Title
 	hostmatch=dceg.cancer.gov
       title:searchtitle=/ - National Cancer Institute//
-	hostmatch=proteomics.cancer.gov
-      title:searchtitle=/ - Office of Cancer Clinical Proteomics Research - National Cancer Institute//
-	hostmatch=imaging.cancer.gov
-      title:searchtitle=/ - Cancer Imaging Program - National Cancer Institute//
-	hostmatch=cancergenome.nih.gov
-      title:searchtitle=/ - TCGA//
 
 
     </value>
@@ -196,4 +218,3 @@
 
     
 </configuration>
-

@@ -202,11 +202,16 @@
 -^(http|https)://whksip-staging.ncifcrf.gov.*
 -^https://assays.cancer.gov.*
 -^https://api.gdc.cancer.gov/data.*
--^https://applications.prevention.cancer.gov.*
+-^https://www.progressreport.cancer.gov/sites/default/files/archive.*
+-^https://applications.prevention.cancer.gov*
 -^https://www.progressreport.cancer.gov/sites/default/files/archive.*
 -^https://datascience.cancer.gov/image-captcha-generate.*
 -^https://nci60.cancer.gov/publiccompare.*
 -^https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga/using-tcga/technology.*
+-^https://api.gdc.cancer.gov.*
+-^https://specimens.cancer.gov.*
+-^https://www.specimens.cancer.gov.*
+-^https://www.specimens.cancer.gov.*
 
 # accept anything else
 +.
