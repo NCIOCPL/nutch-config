@@ -140,21 +140,23 @@
 <property>
     <name>index.replace.regexp</name>
     <value>
-	url:searchurl=/(https|http)\:..//
+        url:searchurl=/(https|http)\:..//
+                
+        title:searchtitle=/=/=/
 
-	title:searchtitle=/=/=/
-
-	hostmatch=www.cancer.gov
-        title:searchtitle=/ - National Cancer Institute//
-		searchtitle:searchtitle=/(.*)—Patient Version/$1/2
-		searchtitle:searchtitle=/(.*)—Health Professional Version/$1/2
-		searchtitle:searchtitle=/(.*)—Versión para pacientes/$1/2
-		searchtitle:searchtitle=/(.*)—Versión para profesionales de salud/$1/2
-
-
-	#Replace DCEGs Title
-	hostmatch=dceg.cancer.gov
-      title:searchtitle=/ - National Cancer Institute//
+        hostmatch=www.cancer.gov
+        title:searchtitle=/ - NCI//
+                searchtitle:title=/=/=/
+                searchtitle:searchtitle=/(.*)—Patient Version/$1/2
+                searchtitle:searchtitle=/(.*)—Health Professional Version/$1/2
+                searchtitle:searchtitle=/(.*)—Versión para pacientes/$1/2
+                searchtitle:searchtitle=/(.*)—Versión para profesionales de salud/$1/2
+          
+          
+        #Replace DCEGs Title
+        hostmatch=dceg.cancer.gov
+          title:searchtitle=/ - NCI//
+          searchtitle:title=/=/=/
 
 
     </value>
