@@ -29,7 +29,7 @@ CRAWL_HOME="`cd "$CRAWL_DIR/.." ; pwd`"
 
 
 # Nutch Java Heapsize @ 4gb
-NUTCH_HEAPSIZE=4096
+NUTCH_HEAPSIZE=6096
 # Local Nutch Log dir
 NUTCH_LOG_DIR="$CRAWL_HOME/log"
 # Local Nutch Conf Dir
@@ -65,7 +65,7 @@ LIMIT="$1"
 
 # Find out where crawl is
 #NUTCH_CRAWL="`which crawl`"
-NUTCH_CRAWL="/usr/local/nutch/apache-nutch-1.17/bin/crawl"
+NUTCH_CRAWL="/usr/local/nutch/apache-nutch-1.18/bin/crawl"
 
 
 COMMAND="$NUTCH_CRAWL"
@@ -74,4 +74,4 @@ if $INDEXFLAG; then
 fi
 COMMAND="$COMMAND -s $NUTCH_CONF_DIR/seeds.txt $CRAWL_HOME/crawl_data $LIMIT"
 
-$COMMAND 
+$COMMAND

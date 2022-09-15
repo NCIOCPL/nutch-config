@@ -21,9 +21,9 @@
 
   <writer id="indexer_elastic" class="org.apache.nutch.indexwriter.elastic.ElasticIndexWriter">
     <parameters>
-      <param name="host" value="hostname"/>
-      <param name="port" value="9200"/>
-      <param name="index" value="sitewide_2020"/>
+      <param name="host" value="XXX"/>
+      <param name="port" value="XXX"/>
+      <param name="index" value="XXX"/>
       <param name="auth" value="false"/>
       <param name="max.bulk.docs" value="250"/>
       <param name="max.bulk.size" value="2500500"/>

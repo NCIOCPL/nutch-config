@@ -16,7 +16,7 @@ export THIS_HOST_NAME=`uname -n`          # e.g. "ncias-s1234-v.nci.nih.gov"
 declare -i DEBUG_MODE=0                   # set to anything intiger greater than 0 to enable debugging output to log file and STDOUT
 
 # Collection Directories
-export COLLECTION_BASE_DIR=/data/nutch/nci1.17
+export COLLECTION_BASE_DIR=/data/nutch/nci1.18
 export COLLECTION_TMP_DIR=$COLLECTION_BASE_DIR/tmp
 export COLLECTION_LOG_DIR=$COLLECTION_BASE_DIR/log
 export COLLECTION_BIN_DIR=$COLLECTION_BASE_DIR/bin

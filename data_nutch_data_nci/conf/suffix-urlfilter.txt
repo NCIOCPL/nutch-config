@@ -73,6 +73,9 @@
 .mpe
 .mp3
 .mp2
+.mp3
+.mp4
+.svg
 .aac
 .mov
 .fla

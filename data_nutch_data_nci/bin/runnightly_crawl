@@ -1,5 +1,5 @@
 #!/bin/bash
-export JAVA_HOME="/usr/lib/jvm/jre"
+export JAVA_HOME="/usr/lib/jdk-11.0.14"
 export ELASTICSEARCH_PROTOCOL=http   
 export ELASTICSEARCH_PORT=9200
 export NCIALERT_EMAIL=NCIAppAlerts@mail.nih.gov

@@ -17,7 +17,7 @@ export THIS_HOST_NAME=`uname -n`          # e.g. "ncias-s1234-v.nci.nih.gov"
 declare -i DEBUG_MODE=0                   # set to anything intiger greater than 0 to enable debugging output to log file and STDOUT
 
 # Collection Directories
-export COLLECTION_BASE_DIR=/data/nutch/nci1.17
+export COLLECTION_BASE_DIR=/data/nutch/nci1.18
 
 export COLLECTION_TMP_DIR=$COLLECTION_BASE_DIR/tmp
 export COLLECTION_LOG_DIR=$COLLECTION_BASE_DIR/log
@@ -200,7 +200,7 @@ debug "SNAPSHOT_DATE_TIME_STAMP=$SNAPSHOT_DATE_TIME_STAMP"
 
 
 $CURL --insecure --connect-timeout $CURL_CONNECT_TIMEOUT --max-time $CURL_MAX_TIME -XPUT $ELASTICSEARCH_PROTOCOL://$ELASTICSEARCH_HOST_NAME:$ELASTICSEARCH_PORT$API_ENDPOINT_PATH$SNAPSHOT_DATE_TIME_STAMP?$QUERY_STRING -H 'Content-Type: application/json' --data '{
-  "indices": "cgov",
+  "indices": "cgov,drugv1,glossaryv1,listinginfov1,trialtypeinfov1,bestbets_live_v1,r4r_v1",
   "ignore_unavailable": "true",
   "include_global_state": false
 }'

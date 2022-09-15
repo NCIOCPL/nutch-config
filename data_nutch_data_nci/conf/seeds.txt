@@ -1,5 +1,8 @@
 ## Main CGov Site to Start
-https://www.cancer.gov/sitemap.xml	nutch.fetchInterval=50400 
+https://www.cancer.gov/sitemap.xml      nutch.fetchInterval=50400
+https://sbir.cancer.gov/sitemap.xml	nutch.fetchInterval=50400
+https://sbir.cancer.gov/sitemap      nutch.fetchInterval=50400 
+https://www.cancer.gov/sitemap       nutch.fetchInterval=50400
 
 ## Divisional Sites
 https://dceg.cancer.gov/sitemap.xml	nutch.fetchInterval=50400
@@ -59,3 +62,4 @@ http://cancerdiagnosis.nci.nih.gov/
 https://hcip.nci.nih.gov/hcip/
 http://iotftraining.nci.nih.gov/
 https://techtransfer.cancer.gov/
+

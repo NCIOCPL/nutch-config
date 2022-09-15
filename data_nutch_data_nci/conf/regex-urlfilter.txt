@@ -212,6 +212,22 @@
 -^https://specimens.cancer.gov.*
 -^https://www.specimens.cancer.gov.*
 -^https://www.specimens.cancer.gov.*
+-^https://imat.cancer.gov/about-imat/grants-awarded.*
+-^https://api.seer.cancer.gov/.*
+-^https://ccrisktool.cancer.gov.*
+-^https://datascience.cancer.gov/comment.*
+-^https://statfund.cancer.gov/toolbox.*
+-^https://www.cancer.gov/node.*
+-^https://datacommons.cancer.gov/sites.*
+-^https://viewer.imaging.datacommons.cancer.gov.*
+-^https://ccr.cancer.gov/image-captcha-generate.*
+-^https://ncif-f5.ncifcrf.gov.*
+-^https://cdas.cancer.gov/files.*
+-^https://seer.cancer.gov/data-software.*
+-^https://edrn.nci.nih.gov/data-and-resources.*
+-^.*icalendar
+-^.*captcha.*
 
 # accept anything else
 +.
+
