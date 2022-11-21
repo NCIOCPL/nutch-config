@@ -13,28 +13,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# config file for urlfilter-domain plugin
-cancer.gov
-brb.nci.nih.gov
-cpfp.nci.nih.gov
-deainfo.nci.nih.gov
-emice.nci.nih.gov
-icbp.nci.nih.gov
-itcr.nci.nih.gov
-ncip.nci.nih.gov
-nih-cbstp.nci.nih.gov
-tmen.nci.nih.gov
-cancerdiagnosis.nci.nih.gov
-cbiit.nci.nih.gov
-cmm.nci.nih.gov
-dcb.nci.nih.gov
-edrn.nci.nih.gov
-electron.nci.nih.gov
-hcip.nci.nih.gov
-icrc.nci.nih.gov
-provocativequestions.nci.nih.gov
-iotftraining.nci.nih.gov
-ncifcrf.gov
-smokefree.gov
-cancergenome.nih.gov
-
+# config file for urlfilter-domaindenylist plugin
