@@ -1,24 +1,25 @@
 ## Main CGov Site to Start
-https://www.cancer.gov/sitemap.xml	nutch.fetchInterval=86400 
+https://www.cancer.gov/sitemaps/pageinstructions.xml
 
 ## Divisional Sites
-https://dceg.cancer.gov/	nutch.fetchInterval=86400
-https://ccr.cancer.gov/	nutch.fetchInterval=86400
-http://dctd.cancer.gov/	nutch.fetchInterval=86400
-https://cancercontrol.cancer.gov/	nutch.fetchInterval=86400
-https://dcb.nci.nih.gov/	nutch.fetchInterval=86400
-https://prevention.cancer.gov/	nutch.fetchInterval=86400
-http://deainfo.nci.nih.gov/	nutch.fetchInterval=86400
+https://dceg.cancer.gov/sitemap.xml
+https://ccr.cancer.gov/
+http://dctd.cancer.gov/
+https://cancercontrol.cancer.gov/
+https://dcb.nci.nih.gov/
+https://prevention.cancer.gov/
+http://deainfo.nci.nih.gov/
+https://sbir.cancer.gov/sitemap.xml
 
 ## Other OCPL Managed sites with search
-http://cam.cancer.gov/	nutch.fetchInterval=86400
-https://cancergenome.nih.gov/	nutch.fetchInterval=86400
-https://proteomics.cancer.gov/	nutch.fetchInterval=86400
-https://imaging.cancer.gov/	nutch.fetchInterval=86400
+http://cam.cancer.gov/
+https://cancergenome.nih.gov/
+https://proteomics.cancer.gov/
+https://imaging.cancer.gov/
 
 
 ## Other NCI Sites where the homepages should be refreshed more frequently
-https://seer.cancer.gov/	nutch.fetchInterval=86400
+https://seer.cancer.gov/
 
 ## Other Sites/seed pages that should get the default re-fetch interval
 https://ncifrederick.cancer.gov/
@@ -59,3 +60,4 @@ http://cancerdiagnosis.nci.nih.gov/
 https://hcip.nci.nih.gov/hcip/
 http://iotftraining.nci.nih.gov/
 https://techtransfer.cancer.gov/
+

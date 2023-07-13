@@ -11,9 +11,9 @@
 	</property>
 
 	<property>
-		<name>hadoop.tmp.dir</name>
-		<value>/tmp</value>
-		<description>Tmp folder</description>
+	<name>hadoop.tmp.dir</name>
+	<value>/data/nutch/nci1.19/tmp</value>
+	<description>Hadoop temp directory</description>
 	</property>
 
 
@@ -63,19 +63,23 @@
 
 	<property>
 		<name>http.timeout</name>
-		<value>10000</value>
-		<description>NCI OVERRIDE: Upped to 20sec from 10sec to allow time for www.cancer.gov to generate its sitemap.xml file. 20151113 - it seems 20sec is not long enough, so reverting to 10sec</description>
+		<value>20000</value>
+		<description>NCI OVERRIDE: Upped to 20sec from 10sec to allow time for www.cancer.gov to generate its sitemap.xml file.</description>
 	</property>
 	
+
+
+
+
 	<property>
 	  <name>fetcher.threads.fetch</name>
-	  <value>100</value>
-	  <description>NCI OVERRIDE: Upping this to 100</description>
+	  <value>50</value>
+	  <description>NCI OVERRIDE: Upping this to 50</description>
 	</property> 
 
 	<property>
 	  <name>fetcher.threads.per.queue</name>
-	  <value>2</value>
+	  <value>1</value>
 	  <description>This number is the maximum number of threads that should be allowed to access a queue at one time. Replaces
 	    deprecated parameter 'fetcher.threads.per.host'. 
 	[BP] Setting this to 1 so that the delay is honored.  Having this set to 10 threads kills some sites (CCR).
@@ -84,56 +88,61 @@
 	</property> 
 
 	<!-- If fetcher.threads.per.queue == 1 then comment the lines below -->
-	<property>
+	<!--<property>
 	  <name>fetcher.server.min.delay</name>
 	  <value>0.3</value>
 	  <description>NCI OVERRIDE: We need to ignore crawl delays in robots.txt for many Drupal sites which are set at 10 sec.  Setting too many threads will kill sites.  This setting acts like fetcher.server.delay, but </description>
 	</property>
 
+	-->
 
-	<!-- If fetcher.threads.per.queue == 1 then uncomment the lines below
-	<property>
+
+	<!-- If fetcher.threads.per.queue == 1 then uncomment the lines below -->
+	   	  <property>
 	  <name>fetcher.server.delay</name>
 	  <value>0.5</value>
 	  <description>NCI OVERRIDE: Attempting this value to not kill slow servers.  Would be nice to set this per host.
 [BP] Setting this to 1 sec delay as we only have 1 thread per site.  This will definately make certain sites *much* slower to crawl.  (CGov would be at least 4000+ seconds...)
 </description>
 	</property> 
-	-->
+		
+	
 
 
 
 	<property>
 		<name>plugin.includes</name>
-			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace|zip)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
 	</property>	
+
+
 
 
 <property>
     <name>index.replace.regexp</name>
     <value>
-	url:searchurl=/(https|http)\:..//
+        url:searchurl=/(https|http)\:..//
+                
+        title:searchtitle=/=/=/
 
-	title:searchtitle=/=/=/
+        hostmatch=www.cancer.gov
+        title:searchtitle=/ - NCI//
+                searchtitle:title=/=/=/
+                searchtitle:searchtitle=/(.*)—Patient Version/$1/2
+                searchtitle:searchtitle=/(.*)—Health Professional Version/$1/2
+                searchtitle:searchtitle=/(.*)—Versión para pacientes/$1/2
+                searchtitle:searchtitle=/(.*)—Versión para profesionales de salud/$1/2
+          
+          
+        #Replace DCEGs Title
+        hostmatch=dceg.cancer.gov
+          title:searchtitle=/ - NCI//
+          searchtitle:title=/=/=/
 
-	hostmatch=www.cancer.gov
-        title:searchtitle=/ - National Cancer Institute//
-		searchtitle:searchtitle=/(.*)—Patient Version/$1/2
-		searchtitle:searchtitle=/(.*)—Health Professional Version/$1/2
-		searchtitle:searchtitle=/(.*)—Versión para pacientes/$1/2
-		searchtitle:searchtitle=/(.*)—Versión para profesionales de salud/$1/2
-
-
-	#Replace DCEGs Title
-	hostmatch=dceg.cancer.gov
-      title:searchtitle=/ - National Cancer Institute//
-	hostmatch=proteomics.cancer.gov
-      title:searchtitle=/ - Office of Cancer Clinical Proteomics Research - National Cancer Institute//
-	hostmatch=imaging.cancer.gov
-      title:searchtitle=/ - Cancer Imaging Program - National Cancer Institute//
-	hostmatch=cancergenome.nih.gov
-      title:searchtitle=/ - TCGA//
-
+        #Replace SBIRs Title
+        hostmatch=sbir.cancer.gov
+          title:searchtitle=/ - NCI//
+          searchtitle:title=/=/=/
 
     </value>
   </property>
@@ -148,7 +157,7 @@
 
 	<property>
 	  <name>index.parse.md</name>
-	  <value>metatag.description,metatag.keywords,metatag.content-language,metatag.dcterms.type</value>
+	  <value>metatag.dc:description,metatag.description,metatag.keywords,metatag.content-language,metatag.dcterms.type</value>
 	  <description>
 	  Comma-separated list of keys to be taken from the parse metadata to generate fields.
 	  Can be used e.g. for 'description' or 'keywords' provided that these values are generated
@@ -164,43 +173,9 @@
 		<description>NCI OVERRIDE: We only want to detect the language it it exists in the headers/metatags</description>
 	</property>
 
- 	<!-- Elasticsearch properties -->
 
-	<property>
-	  <name>elastic.host</name>
-	  <value>${ES_HOST}</value>
-	  <description>The hostname to send documents to using TransportClient. Either host and port must be defined or cluster.</description>
-	</property>
-
-	<property>
-	  <name>elastic.port</name>
-	  <value>${ES_CLUSTER_PORT}</value>
-	  <description>
-	  </description>
-	</property>
-
-	<property>
-	  <name>elastic.cluster</name>
-	  <value>${ES_CLUSTER_NAME}</value>
-	  <description>The cluster name to discover. Either host and port must be defined or cluster.</description>
-	</property>
-
-	<property>
-	  <name>elastic.index</name>
-	  <value>${ES_INDEX_NAME}</value>
-	  <description>Default index to send documents to.</description>
-	</property>
-
-	<property>
-	  <name>elastic.max.bulk.docs</name>
-	  <value>250</value>
-	  <description>Maximum size of the bulk in number of documents.</description>
-	</property>
-
-	<property>
-	  <name>elastic.max.bulk.size</name>
-	  <value>2500500</value>
-	  <description>Maximum size of the bulk in bytes.</description>
-	</property>
-
+    
 </configuration>
+
+
+
