@@ -1,15 +1,27 @@
 ## Main CGov Site to Start
-https://www.cancer.gov/sitemaps/pageinstructions.xml
+https://www.cancer.gov/sitemaps/pageinstructions.xml	nutch.score=9	nutch.fetchInterval=50400
+https://www.cancer.gov/sitemaps/dynamiclistingpages.xml
+https://www.cancer.gov/rare-brain-spine-tumor/sitemap.xml	nutch.score=8	nutch.fetchInterval=50400
+https://www.cancer.gov/nano/sitemap.xml	nutch.score=8	nutch.fetchInterval=50400
+https://www.cancer.gov/pediatric-adult-rare-tumor/sitemap.xml	nutch.score=8	nutch.fetchInterval=50400
+https://www.cancer.gov/connect-prevention-study/sitemap.xml	nutch.score=8	nutch.fetchInterval=50400
+https://physics.cancer.gov/sitemap.xml	nutch.score=8	nutch.fetchInterval=50400
+https://sbir.cancer.gov/sitemap.xml	nutch.score=8	nutch.fetchInterval=50400
+https://dceg.cancer.gov/sitemap.xml	nutch.score=10	nutch.fetchInterval=50400
+https://techtransfer.cancer.gov/sitemap.xml	
+https://www.cancer.gov/ccg/sitemap.xml	nutch.score=10	nutch.fetchInterval=50400
+https://nationalcancerplan.cancer.gov/sitemap.xml
+https://prescancerpanel.cancer.gov/sitemap-0.xml
+https://prescancerpanel.cancer.gov/sitemap-index.xml
+
 
 ## Divisional Sites
-https://dceg.cancer.gov/sitemap.xml
 https://ccr.cancer.gov/
 http://dctd.cancer.gov/
 https://cancercontrol.cancer.gov/
 https://dcb.nci.nih.gov/
-https://prevention.cancer.gov/
+https://prevention.cancer.gov/	nutch.score=9   nutch.fetchInterval=50400
 http://deainfo.nci.nih.gov/
-https://sbir.cancer.gov/sitemap.xml
 
 ## Other OCPL Managed sites with search
 http://cam.cancer.gov/
@@ -46,7 +58,6 @@ https://ocg.cancer.gov/
 http://marrowfailure.cancer.gov/
 http://ncioa.cancer.gov/oa-internet/
 https://resresources.nci.nih.gov/
-https://sbir.cancer.gov/
 http://smokefree.gov/
 http://women.smokefree.gov/
 https://teen.smokefree.gov/
@@ -54,10 +65,8 @@ http://espanol.smokefree.gov/
 https://progressreport.cancer.gov/
 http://surveillance.cancer.gov/
 http://statfund.cancer.gov/
-https://techtransfer.cancer.gov/
 https://visualsonline.cancer.gov/
 http://cancerdiagnosis.nci.nih.gov/
 https://hcip.nci.nih.gov/hcip/
 http://iotftraining.nci.nih.gov/
-https://techtransfer.cancer.gov/
 

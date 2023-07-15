@@ -7,7 +7,7 @@
 
 	<property>
 		<name>http.agent.name</name>
-		<value>Info Crawler</value>
+		<value>CancerGov Web Crawler</value>
 	</property>
 
 	<property>
@@ -31,8 +31,8 @@
 	
 	<property>
 		<name>db.fetch.interval.default</name>
-		<!--<value>1202400</value>-->
-		<value>86400</value>
+		<value>1202400</value>
+		<!--<value>86400</value>-->
 		<description>NCI OVERRIDE: Setting this to about 14 days.  Technically, 14 days minus 2 hrs.  20151113 setting to every night for testing </description>
 	</property>
 
@@ -60,6 +60,7 @@
 		<value>-1</value>
 		<description>The maximum number of characters of a title that are indexed. A value of -1 disables this check.</description>
 	</property>
+
 
 	<property>
 		<name>http.timeout</name>
@@ -106,13 +107,22 @@
 </description>
 	</property> 
 		
+
+
+	<property>
+  		<name>indexer.delete.robots.noindex</name>
+  		<value>true</value>
+  		<description>Whether the indexer will delete documents marked by robots=noindex
+  		</description>
+	</property>
+
 	
 
 
 
 	<property>
 		<name>plugin.includes</name>
-			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace|zip)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+			<value>protocol-http|urlfilter-(regex|domain|suffix)|parse-(html|tika|metatags|replace)|language-identifier|index-(basic|anchor|metadata|replace|more)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
 	</property>	
 
 
@@ -143,6 +153,12 @@
         hostmatch=sbir.cancer.gov
           title:searchtitle=/ - NCI//
           searchtitle:title=/=/=/
+
+        #Replace PCPs Title
+        hostmatch=prescancerpanel.cancer.gov
+          title:searchtitle=/ - President's Cancer Panel//
+          searchtitle:title=/=/=/
+
 
     </value>
   </property>
@@ -176,6 +192,7 @@
 
     
 </configuration>
+
 
 
 

@@ -225,10 +225,10 @@
 -^https://cdas.cancer.gov/files.*
 -^https://seer.cancer.gov/data-software.*
 -^https://edrn.nci.nih.gov/data-and-resources.*
+-^https://www.cancer.gov/ccg/research/structural-genomics/tcga/using-tcga-data/technology.*
 -^.*icalendar
 -^.*captcha.*
+-^https://ncihub.cancer.gov.*
 
 # accept anything else
 +.
-
-
