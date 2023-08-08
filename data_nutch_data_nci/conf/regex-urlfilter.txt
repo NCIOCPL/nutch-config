@@ -111,7 +111,6 @@
 -^(http|https)://icbc.cancer.gov.*
 -^(http|https)://library.ncifcrf.gov.*
 -^(http|https)://li-gis.cancer.gov.*
--^(http|https)://maps.cancer.gov.*
 -^(http|https)://mcl1.ncifcrf.gov.*
 -^(http|https)://ncccp.cancer.gov.*
 -^(http|https)://npsg.ncifcrf.gov.*
@@ -232,3 +231,5 @@
 
 # accept anything else
 +.
+
+

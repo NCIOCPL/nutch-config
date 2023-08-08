@@ -23,6 +23,15 @@ https://dcb.nci.nih.gov/
 https://prevention.cancer.gov/	nutch.score=9   nutch.fetchInterval=50400
 http://deainfo.nci.nih.gov/
 
+
+## DCCPS sites
+https://staffprofiles.cancer.gov/brp/prgmStaffHome.do
+https://staffprofiles-sg.cancer.gov/brp/granteeList.do
+https://grantees-cancercontrol.cancer.gov/od/investigatorList.do
+https://maps.cancer.gov/overview/index.jsp
+https://maps.cancer.gov/overview/map/index.jsp
+
+
 ## Other OCPL Managed sites with search
 http://cam.cancer.gov/
 https://cancergenome.nih.gov/
